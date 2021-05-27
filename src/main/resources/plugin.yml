@@ -1,0 +1,7 @@
+main: com.wynnlab.Plugin
+name: WynnLabScriptAPI
+version: 1.0
+description: The WynnLab scripts
+api-version: 1.16
+authors: [ Siinus ]
+depend: [ KBukkit ]
