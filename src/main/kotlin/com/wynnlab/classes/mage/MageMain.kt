@@ -8,7 +8,7 @@ import org.bukkit.Sound
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 
-class MageMain(player: Player) : BasePlayerSpell(player) {
+class MageMain(player: Player) : BasePlayerSpell(player, 0) {
     private val hit = mutableSetOf<Entity>()
 
     override fun tick() {

@@ -2,6 +2,6 @@ package com.wynnlab
 
 import org.bukkit.plugin.java.JavaPlugin
 
-class Plugin : JavaPlugin() {
+object Plugin : JavaPlugin()
 
-}
+val random = java.util.Random()
