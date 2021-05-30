@@ -8,17 +8,17 @@ import org.bukkit.Sound
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 
-class Teleport(player: Player) : BasePlayerSpell(player, 0) {
+class Teleport(player: Player) : BasePlayerSpell(player, 0, 4) {
     private val hit = mutableSetOf<Entity>()
 
     override fun tick() {
         val ray = player.rayTraceBlocks(14.0)
         val target = player.location.clone() + (if (ray?.hitBlock == null) player.direction.clone().multiply(14) else ray.hitPosition)
 
-        while (!target.block.isPassable) {
+        /*while (!target.block.isPassable) {
             target + (player.direction.clone() * -1)
             target.direction = player.direction
-        }
+        }*/
 
         val particleStart = player.eyeLocation
         player.teleport(target)

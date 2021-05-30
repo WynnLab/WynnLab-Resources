@@ -11,7 +11,7 @@ import org.bukkit.entity.Player
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
-class IceSnake(player: Player) : BasePlayerSpell(player, 20) {
+class IceSnake(player: Player) : BasePlayerSpell(player, 20, 6) {
     private val hit = mutableSetOf<Entity>()
     private val iceLoc = player.location.clone().add(.0, 1.0, .0)
 

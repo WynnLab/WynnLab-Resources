@@ -1,23 +1,33 @@
 package com.wynnlab.util
 
 import com.wynnlab.extensions.minus
+import com.wynnlab.extensions.plus
 import com.wynnlab.extensions.times
 import org.bukkit.Location
 
-class Locations(private val l1: Location, private val l2: Location, private val step: Double = 1.0) : Iterable<Location>, Iterator<Location> {
-    override fun iterator(): Iterator<Location> = this
+class Locations(
+    val start: Location,
+    val end: Location,
+    val step: Double
+) : Iterable<Location> {
+    private val d = (end.clone() - start).toVector().normalize() * step
 
-    private val distance = l1.distance(l2)
-    init {
-        (l2 - l1).toVector().normalize() * step
-    }
+    override operator fun iterator(): Iterator<Location> =
+        object : Iterator<Location> {
+            private var l = start.clone()
 
-    private var current = .0
+            private var iStep = 0.0
+            private val dist: Double = end.distance(start)
 
-    override fun hasNext(): Boolean = current + step < distance
+            override operator fun hasNext(): Boolean {
+                return iStep <= dist
+            }
 
-    override fun next(): Location {
-        current += step
-        return l1.add(l2)
-    }
+            override operator fun next(): Location {
+                val r = l
+                l + d
+                iStep += step
+                return r
+            }
+        }
 }

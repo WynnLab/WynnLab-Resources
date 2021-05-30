@@ -10,7 +10,7 @@ import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.util.Vector
 
-class Meteor(player: Player) : BasePlayerSpell(player, 60) {
+class Meteor(player: Player) : BasePlayerSpell(player, 60, 8) {
     private lateinit var target: Location
     private lateinit var origin: Location
     private lateinit var direction: Vector

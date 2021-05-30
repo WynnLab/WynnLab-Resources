@@ -9,7 +9,7 @@ import org.bukkit.attribute.Attribute
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityRegainHealthEvent
 
-class Heal(player: Player) : BasePlayerSpell(player, 40) {
+class Heal(player: Player) : BasePlayerSpell(player, 40, 6) {
     override fun tick() {
         if (t % 20 > 0) return
 
@@ -21,11 +21,11 @@ class Heal(player: Player) : BasePlayerSpell(player, 40) {
 
         val amount = player.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.value
         heal(player, amount)
-        player.sendMessage("§4[§c+$amount❤§4]")
+        player.sendMessage("§4[§c+${amount.toInt()}❤§4]")
 
         for (e in healable(4.0, 4.0, 4.0)) {
             heal(e, amount)
-            e.sendMessage("§4[§c+$amount❤§4] §7(${player.name})")
+            e.sendMessage("§4[§c+${amount.toInt()}❤§4] §7(${player.name})")
             Bukkit.getPluginManager().callEvent(EntityRegainHealthEvent(e, amount, EntityRegainHealthEvent.RegainReason.CUSTOM))
 
             particle(e.location.clone().add(.0, 1.0, .0), Particle.FIREWORKS_SPARK, 16, .3, 1.0, .3, .05)
