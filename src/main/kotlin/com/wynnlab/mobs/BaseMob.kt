@@ -31,7 +31,7 @@ abstract class BaseMob {
     abstract val deathSound: Sound?
     abstract val kbResistance: Double
     abstract val equipment: Equipment
-    abstract val spells: List<(thiz: Entity, target: Player) -> BaseMobSpell>
+    abstract val spells: List<(Entity, Player) -> BaseMobSpell>
 
     data class Equipment(
         val head: ItemStack? = null,

@@ -1,41 +1,12 @@
 package com.wynnlab.classes
 
-import com.wynnlab.plugin
-import org.bukkit.Bukkit
+import com.wynnlab.base.BaseSpell
 import org.bukkit.entity.Player
 
-abstract class BasePlayerSpell(val player: Player, private val maxTick: Int, val cost: Int = 0) : Runnable {
-    var t = -1
+abstract class BasePlayerSpell(
+    val player: Player,
+    maxTick: Int,
+    val cost: Int = 0
+) : BaseSpell(maxTick) {
     val clone = "clone" in player.scoreboardTags
-
-    private var taskId = -1
-
-    open fun onCast() {}
-
-    open fun onTick() {}
-
-    open fun onCancel() {}
-
-    override fun run() {
-        ++t
-
-        onTick()
-
-        if (t >= maxTick)
-            cancel()
-    }
-
-    protected fun delay() {
-        --t
-    }
-
-    protected fun cancel() {
-        onCancel()
-        Bukkit.getScheduler().cancelTask(taskId)
-    }
-
-    fun schedule(delay: Long = 0L, period: Long = 1L) {
-        taskId = Bukkit.getScheduler().runTaskTimer(plugin, this, delay, period).taskId
-        onCast()
-    }
 }

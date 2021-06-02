@@ -30,7 +30,7 @@ object MadScientist : BaseMob() {
     override val kbResistance = .0
     override val equipment = Equipment(mainHand = ItemStack(Material.DRAGON_BREATH), offHand = ItemStack(Material.EXPERIENCE_BOTTLE))
 
-    override val spells: List<(thiz: Entity, target: Player) -> BaseMobSpell> = listOf(
+    override val spells: List<(Entity, Player) -> BaseMobSpell> = listOf(
         ::ChemicalAura
     )
 }
