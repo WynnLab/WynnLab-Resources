@@ -11,7 +11,7 @@ import org.bukkit.entity.Player
 class MageMain(player: Player) : BasePlayerSpell(player, 0) {
     private val hit = mutableSetOf<Entity>()
 
-    override fun tick() {
+    override fun onCast() {
         val l1 = player.eyeLocation.subtract(.0, .5, .0)
         val l2 = (player.eyeLocation + (player.direction * 7)).subtract(.0, .5, .0)
 

@@ -3,6 +3,7 @@ package com.wynnlab.classes.mage
 import com.wynnlab.classes.BasePlayerSpell
 import com.wynnlab.extensions.*
 import com.wynnlab.util.normalizeOnXZ
+import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.Sound
@@ -13,9 +14,13 @@ import org.bukkit.potion.PotionEffectType
 
 class IceSnake(player: Player) : BasePlayerSpell(player, 20, 6) {
     private val hit = mutableSetOf<Entity>()
-    private val iceLoc = player.location.clone().add(.0, 1.0, .0)
+    private lateinit var iceLoc: Location
 
-    override fun tick() {
+    override fun onCast() {
+        iceLoc = player.location.clone().add(.0, 1.0, .0)
+    }
+
+    override fun onTick() {
         iceLoc + player.direction.normalizeOnXZ()
 
         val iceBlock = player.world.spawnFallingBlock(iceLoc, if (clone) Material.OBSIDIAN.createBlockData() else Material.PACKED_ICE.createBlockData())

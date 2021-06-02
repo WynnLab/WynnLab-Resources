@@ -11,7 +11,7 @@ import org.bukkit.entity.Player
 class Teleport(player: Player) : BasePlayerSpell(player, 0, 4) {
     private val hit = mutableSetOf<Entity>()
 
-    override fun tick() {
+    override fun onCast() {
         val ray = player.rayTraceBlocks(14.0)
         val target = player.location.clone() + (if (ray?.hitBlock == null) player.direction.clone().multiply(14) else ray.hitPosition)
 

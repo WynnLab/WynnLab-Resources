@@ -15,35 +15,34 @@ class Meteor(player: Player) : BasePlayerSpell(player, 60, 8) {
     private lateinit var origin: Location
     private lateinit var direction: Vector
 
-    override fun tick() {
-        if (t == 0) {
-            val ray = player.rayTraceBlocks(21.0)
-            var rayLoc =
-                if (ray == null || ray.hitBlock == null) player.eyeLocation.clone() + player.direction * 21 else ray.hitBlock!!.location
-            if (ray != null && ray.hitEntity != null)
-                rayLoc = ray.hitEntity!!.location
+    override fun onCast() {
+        val ray = player.rayTraceBlocks(21.0)
+        var rayLoc = if (ray == null || ray.hitBlock == null) player.eyeLocation.clone() + player.direction * 21 else ray.hitBlock!!.location
+        if (ray != null && ray.hitEntity != null)
+            rayLoc = ray.hitEntity!!.location
 
-            for (e in targets(rayLoc, 7.0, 7.0, 7.0))
-                if (!::target.isInitialized || rayLoc.distance(target) > e.location.distance(target))
-                    target = e.location
+        for (e in targets(rayLoc, 7.0, 7.0, 7.0))
+            if (!::target.isInitialized || rayLoc.distance(target) > e.location.distance(target))
+                target = e.location
 
-            if (!::target.isInitialized)
-                target = rayLoc
-            while (target.block.isPassable)
-                target.subtract(.0, 1.0, .0)
+        if (!::target.isInitialized)
+            target = rayLoc
+        while (target.block.isPassable)
+            target.subtract(.0, 1.0, .0)
 
-            origin = target.clone().add(random.nextDouble() * 5 - 2.5, 21.0, random.nextDouble() * 5 - 2.5)
-            direction = (origin.clone() - target).toVector().normalize()
+        origin = target.clone().add(random.nextDouble() * 5 - 2.5, 21.0, random.nextDouble() * 5 - 2.5)
+        direction = (origin.clone() - target).toVector().normalize()
 
-            for (l in Locations(target, origin, .5))
-                particle(l, if (clone) Particle.SOUL_FIRE_FLAME else Particle.FLAME, 1, .0, .0, .0, .0)
+        for (l in Locations(target, origin, .5))
+            particle(l, if (clone) Particle.SOUL_FIRE_FLAME else Particle.FLAME, 1, .0, .0, .0, .0)
 
-            direction * -1
+        direction * -1
 
-            if (clone)
-                sound(origin, Sound.ENTITY_EVOKER_PREPARE_SUMMON, 1f, .5f)
-        }
+        if (clone)
+            sound(origin, Sound.ENTITY_EVOKER_PREPARE_SUMMON, 1f, .5f)
+    }
 
+    override fun onTick() {
         val particleCount = when {
             t <= 5 -> 4
             t <= 10 -> 3

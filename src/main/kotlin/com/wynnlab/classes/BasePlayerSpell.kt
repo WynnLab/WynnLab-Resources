@@ -10,12 +10,16 @@ abstract class BasePlayerSpell(val player: Player, private val maxTick: Int, val
 
     private var taskId = -1
 
-    abstract fun tick()
+    open fun onCast() {}
+
+    open fun onTick() {}
+
+    open fun onCancel() {}
 
     override fun run() {
         ++t
 
-        tick()
+        onTick()
 
         if (t >= maxTick)
             cancel()
@@ -26,10 +30,12 @@ abstract class BasePlayerSpell(val player: Player, private val maxTick: Int, val
     }
 
     protected fun cancel() {
+        onCancel()
         Bukkit.getScheduler().cancelTask(taskId)
     }
 
     fun schedule(delay: Long = 0L, period: Long = 1L) {
         taskId = Bukkit.getScheduler().runTaskTimer(plugin, this, delay, period).taskId
+        onCast()
     }
 }

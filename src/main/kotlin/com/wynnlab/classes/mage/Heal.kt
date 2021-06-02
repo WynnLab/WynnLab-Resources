@@ -10,8 +10,8 @@ import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityRegainHealthEvent
 
 class Heal(player: Player) : BasePlayerSpell(player, 40, 6) {
-    override fun tick() {
-        if (t % 20 > 0) return
+    override fun onTick() {
+        if (t % 20 != 0) return
 
         particle(player.location.clone().add(.0, .5, .0), Particle.PORTAL, 144, 4.0, .0, 4.0, .1)
         particle(player.location.clone().add(.0, .3, .0), Particle.CRIT_MAGIC, 144, 4.0, .0, 4.0, .1)
