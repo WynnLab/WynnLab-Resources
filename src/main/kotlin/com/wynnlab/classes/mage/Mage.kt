@@ -12,10 +12,6 @@ object Mage : BaseClass() {
     override val metaStats = MetaStats(2, 3, 3, 5)
 
     override val spells: List<(Player) -> BasePlayerSpell> = listOf(
-        { MageMain(it) },
-        { Heal(it) },
-        { Teleport(it) },
-        { Meteor(it) },
-        { IceSnake(it) }
+        ::MageMain, ::Heal, ::Teleport, ::Meteor, ::IceSnake
     )
 }

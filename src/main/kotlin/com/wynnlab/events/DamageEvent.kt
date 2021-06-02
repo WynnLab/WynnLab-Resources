@@ -5,7 +5,7 @@ import org.bukkit.event.Event
 import org.bukkit.event.HandlerList
 
 class DamageEvent(
-    val attacker: LivingEntity,
+    val source: LivingEntity,
     val target: LivingEntity,
     val melee: Boolean,
     val multiplier: Double,

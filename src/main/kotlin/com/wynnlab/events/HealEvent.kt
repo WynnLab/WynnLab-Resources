@@ -5,7 +5,7 @@ import org.bukkit.event.Event
 import org.bukkit.event.HandlerList
 
 class HealEvent(
-    val healer: LivingEntity,
+    val source: LivingEntity,
     val target: LivingEntity,
     val amount: Double
 ) : Event() {
