@@ -1,7 +1,8 @@
 main: com.wynnlab.Plugin
-name: WynnLabScriptAPI
-version: 1.0
-description: The WynnLab scripts
+name: WynnLabResources
+version: @VERSION@
+description: The WynnLab resources
 api-version: 1.16
 authors: [ Siinus ]
-depend: [ KBukkit ]
+depend: [ KBukkit, WynnLabAPI ]
+loadbefore: [ WynnLab ]
