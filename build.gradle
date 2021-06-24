@@ -1,36 +1,39 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.4.32'
+    id 'org.jetbrains.kotlin.jvm' version '1.5.10'
 }
 
 group = 'com.wynnlab'
-version = '1.0-SNAPSHOT'
+version = '1.1.0'
+
+ext {
+    kotlinVersion = '1.5.10'
+    apiVersion = '1.17'
+    paperRelease = '0.1-SNAPSHOT'
+}
 
 repositories {
     mavenCentral()
-    maven {
-        name = 'papermc-repo'
-        url = 'https://papermc.io/repo/repository/maven-public/'
-    }
+    maven { url = 'https://papermc.io/repo/repository/maven-public/' }
     flatDir {
         dirs 'D:\\IdeaProjects\\WynnLabAPI\\build\\libs'
     }
 }
 
 dependencies {
-    compileOnly name: 'WynnLabAPI-1.0-SNAPSHOT'
-    compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
-    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compileOnly name: "WynnLabAPI-$version"
+    compileOnly "io.papermc.paper:paper-api:$apiVersion-R$paperRelease"
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 16
+targetCompatibility = 16
 
 compileKotlin {
-    kotlinOptions.jvmTarget = '1.8'
+    kotlinOptions.jvmTarget = '16'
 }
 
 compileTestKotlin {
-    kotlinOptions.jvmTarget = '1.8'
+    kotlinOptions.jvmTarget = '16'
 }
 
 processResources {

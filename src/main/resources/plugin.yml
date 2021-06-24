@@ -2,7 +2,7 @@ main: com.wynnlab.Plugin
 name: WynnLabResources
 version: @VERSION@
 description: The WynnLab resources
-api-version: 1.16
+api-version: 1.17
 authors: [ Siinus ]
 depend: [ KBukkit, WynnLabAPI ]
 loadbefore: [ WynnLab ]
